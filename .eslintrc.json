@@ -1,0 +1,29 @@
+  
+{
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "prettier-standard/lib/base",
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "prettier"
+  ],
+  "plugins": ["import", "node"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": false,
+        "printWidth": 100
+      }
+    ],
+    "node/no-unsupported-features": "off",
+    "node/no-unpublished-require": 0,
+    "no-console": "error",
+    "no-new": "off",
+    "prefer-const": "error"
+  }
+}
