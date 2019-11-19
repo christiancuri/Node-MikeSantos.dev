@@ -1,0 +1,26 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "gcr.io/mikesantos-builds/${_WORKLOAD_NAME_}:${_DIGEST_}",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/mikesantos-builds/${_WORKLOAD_NAME_}:${_DIGEST_}"]
+  - name: "gcr.io/cloud-builders/kubectl"
+    args:
+      - "set"
+      - "image"
+      - "deployment"
+      - "${_WORKLOAD_NAME_}"
+      - "${_WORKLOAD_NAME_}=gcr.io/mikesantos-builds/${_WORKLOAD_NAME_}:${_DIGEST_}"
+    env:
+      - "CLOUDSDK_COMPUTE_ZONE=${_COMPUTE_ZONE_}"
+      - "CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_}"
+substitutions:
+  _COMPUTE_ZONE_: southamerica-east1-a
+  _CLUSTER_: mikesantos
+images:
+  - "gcr.io/mikesantos-builds/${_WORKLOAD_NAME_}:${_DIGEST_}"

@@ -1,9 +1,17 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "bin/fork.js",
+  "author": "ChristianCuri <contato.mikesantos@gmail.com> (https://mikesantos.dev)",
   "repository": "git@github.com:christiancuri/Node-MikeSantos.dev.git",
   "license": "MIT",
+  "scripts": {
+    "server:prod": "export PORT=8080 && node -r esm bin/fork.js",
+    "server:dev": "nodemon -r esm bin/fork.js",
+    "start": "npm run server:dev",
+    "lint:check": "eslint --ext .js ./",
+    "lint:fix": "yarn lint:check --fix"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "esm": "^3.2.25",

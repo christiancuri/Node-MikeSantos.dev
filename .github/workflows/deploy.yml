@@ -1,0 +1,37 @@
+name: Deploy development
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy_dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        if: "contains(github.event.commits.*.message, 'ci: skip') != true"
+
+      - uses: docker://google/cloud-sdk:alpine
+        if: "contains(github.event.commits.*.message, 'ci: skip') != true"
+
+      - name: Setup SSH
+        if: "contains(github.event.commits.*.message, 'ci: skip') != true"
+        uses: webfactory/ssh-agent@v0.1.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Store service account
+        if: "contains(github.event.commits.*.message, 'ci: skip') != true"
+        run: echo ${{ secrets.GCLOUD_SERVICE_KEY }} | base64 --decode --ignore-garbage > ${HOME}/gcloud-services-key.json
+
+      - name: Activate service account
+        if: "contains(github.event.commits.*.message, 'ci: skip') != true"
+        run: gcloud auth activate-service-account --key-file=${HOME}/gcloud-services-key.json
+
+      - name: Config gcloud project and timezone
+        if: "contains(github.event.commits.*.message, 'ci: skip') != true"
+        run: gcloud config set project ChristianCuri && gcloud config set compute/zone southamerica-east1-a
+
+      - name: Create and deploy app image
+        if: "contains(github.event.commits.*.message, 'ci: skip') != true"
+        run: gcloud builds submit . --config .deploy/gcloud.yaml --substitutions _WORKLOAD_NAME_=mikesantos-backend,_DIGEST_=${{ github.sha }}
