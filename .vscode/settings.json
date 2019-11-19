@@ -1,8 +1,12 @@
 {
-  "editor.formatOnSave": true,
-  "eslint.autoFixOnSave": true,
-  "[javascript]": {
-    "editor.formatOnSave": false
-  },
-  "eslint.alwaysShowStatus": true
+	"editor.formatOnSave": true,
+	"eslint.autoFixOnSave": true,
+	"[javascript]": {
+		"editor.formatOnSave": true
+	},
+	"eslint.alwaysShowStatus": true,
+	"editor.tabSize": 2,
+	"prettier.useTabs": true,
+	"editor.insertSpaces": true,
+	"editor.detectIndentation": false
 }

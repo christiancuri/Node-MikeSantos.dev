@@ -1,0 +1,12 @@
+import ModuleRoutes from '../src/module/ModuleRoutes'
+
+const initalizeEnv = async env => {
+  process.myEnv = env;
+  return true;
+}  
+
+process.on('message', env => {
+  initalizeEnv(env).then(() => {
+    // TODO: Start microservice modules
+  })
+})
