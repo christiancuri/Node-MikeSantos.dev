@@ -20,7 +20,7 @@ App.init().then(() => {
 		proc.send(process.myEnv);
 	};
 
-	if (process.env.ENVIRONEMT === "development") {
+	if (process.env.ENVIRONMENT === "development") {
 		forkCluster();
 	} else {
 		for (let i = 0; i < cpuCount; i++) {

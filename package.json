@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"scripts": {
 		"server:prod": "export PORT=8080 && node -r esm bin/fork.js",
-		"server:dev": "export ENVIRONEMT=development && nodemon -r esm bin/fork.js",
+		"server:dev": "export ENVIRONMENT=development && nodemon -r esm bin/fork.js",
 		"start": "npm run server:dev",
 		"lint:check": "eslint --ext .js ./",
 		"lint:fix": "yarn lint:check --fix"
