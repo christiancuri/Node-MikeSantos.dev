@@ -1,5 +1,5 @@
 {
-	"name": "backend",
+	"name": "mikesantos-backend",
 	"version": "1.0.0",
 	"main": "bin/fork.js",
 	"author": "ChristianCuri <contato.mikesantos@gmail.com> (https://mikesantos.dev)",

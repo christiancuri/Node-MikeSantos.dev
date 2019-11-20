@@ -47,6 +47,10 @@ const Env = {
 		const env = yaml.parse(file);
 		process.myEnv = env;
 		return true;
+	},
+
+	get PORT() {
+		return process.myEnv.PORT;
 	}
 };
 

@@ -1,11 +1,14 @@
 import cluster from "cluster";
 import os from "os";
 
-import { Env } from "../src/utils";
+import pack from "../package.json";
+import { Env, logger } from "../src/utils";
 
 const cpuCount = os.cpus().length;
 
 Env.init().then(() => {
+	logger.info(`Starting ${pack.name} v${pack.version} on port ${Env.PORT}`);
+
 	cluster.setupMaster({ exec: "./bin/www" });
 
 	const forkCluster = () => {
