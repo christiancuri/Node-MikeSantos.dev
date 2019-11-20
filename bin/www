@@ -8,5 +8,6 @@ const initalizeEnv = async env => {
 process.on('message', env => {
   initalizeEnv(env).then(() => {
     // TODO: Start microservice modules
+    
   })
 })

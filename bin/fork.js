@@ -1,18 +1,11 @@
 import cluster from "cluster";
 import os from "os";
 
+import { Env } from "../src/utils";
+
 const cpuCount = os.cpus().length;
 
-const App = {
-	init: async () => {
-		process.myEnv = {
-			customEnv: "Future"
-		};
-		return true;
-	}
-};
-
-App.init().then(() => {
+Env.init().then(() => {
 	cluster.setupMaster({ exec: "./bin/www" });
 
 	const forkCluster = () => {
